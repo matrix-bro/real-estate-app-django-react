@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from app.models.realtor import Realtor
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework import permissions
 
 class RealtorSerializer(serializers.ModelSerializer):
@@ -14,3 +14,6 @@ class RealtorListView(ListAPIView):
     serializer_class = RealtorSerializer
     pagination_class = None
             
+class RealtorDetailView(RetrieveAPIView):
+    queryset = Realtor.objects.all()
+    serializer_class = RealtorSerializer

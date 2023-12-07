@@ -7,6 +7,7 @@ urlpatterns = [
     
     # realtor
     path('realtors/', realtor.RealtorListView.as_view(), name='realtors'),
+    path('realtor/<int:pk>/', realtor.RealtorDetailView.as_view(), name='realtor-details'),
 
     
 ]
