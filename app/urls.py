@@ -1,5 +1,5 @@
 from django.urls import path
-from app.api import account, realtor
+from app.api import account, realtor, listing
 
 urlpatterns = [
     # account
@@ -10,5 +10,7 @@ urlpatterns = [
     path('realtor/<int:pk>/', realtor.RealtorDetailView.as_view(), name='realtor-details'),
     path('realtors/topseller/', realtor.TopSellerRealtorView.as_view(), name='realtor-topseller'),
 
+    # listing
+    path('listings/', listing.ListingView.as_view(), name='listings'),
     
 ]
