@@ -12,5 +12,6 @@ urlpatterns = [
 
     # listing
     path('listings/', listing.ListingView.as_view(), name='listings'),
+    path('listings/<slug>/details/', listing.ListingDetailView.as_view(), name='listing-details'),
     
 ]
