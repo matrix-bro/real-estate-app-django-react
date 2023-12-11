@@ -1,5 +1,5 @@
 from django.urls import path
-from app.api import account, realtor, listing
+from app.api import account, realtor, listing, contact
 
 urlpatterns = [
     # account
@@ -14,5 +14,8 @@ urlpatterns = [
     path('listings/', listing.ListingView.as_view(), name='listings'),
     path('listings/<slug>/details/', listing.ListingDetailView.as_view(), name='listing-details'),
     path('listings/search/', listing.SearchListingsView.as_view(), name='search-listings'),
+
+    # contact
+    path('contact/', contact.ContactCreateView, name='contact')
     
 ]
