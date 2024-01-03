@@ -16,6 +16,6 @@ urlpatterns = [
     path('listings/search/', listing.SearchListingsView.as_view(), name='search-listings'),
 
     # contact
-    path('contact/', contact.ContactCreateView, name='contact')
+    path('contact/', contact.ContactCreateView.as_view(), name='contact')
     
 ]

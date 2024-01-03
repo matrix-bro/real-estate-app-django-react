@@ -160,3 +160,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 FILE_UPLOAD_PERMISSONS = 0o640
 
 AUTH_USER_MODEL = 'app.UserAccount'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
