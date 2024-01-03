@@ -1,3 +1,4 @@
-# Real Estate App using React & Django REST Framework
+# Real Estate App
 
-A Real Estate Application using React & Django REST Framework.
+- Frontend in React
+- Backend in Django
