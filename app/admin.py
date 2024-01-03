@@ -1,4 +1,5 @@
 from django.contrib import admin
+from app.models.contact import Contact
 from app.models.listing import Listing
 from app.models.realtor import Realtor
 from django.contrib.auth import get_user_model
@@ -23,3 +24,5 @@ class ListingAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 admin.site.register(Listing, ListingAdmin)    
+
+admin.site.register(Contact)

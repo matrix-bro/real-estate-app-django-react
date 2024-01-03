@@ -14,24 +14,31 @@ class ContactCreateView(APIView):
     permission_classes = (permissions.AllowAny, )
 
     def post(self, request, format=None):
-        data = self.request.data
+        serializer = ContactSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        first_name = serializer.validated_data['first_name']
+        last_name = serializer.validated_data['last_name']
+        email = serializer.validated_data['email']
+        subject = serializer.validated_data['subject']
+        message = serializer.validated_data['message']
 
         try:
             # Making a bit nice format message
-            msg = f"Full Name: {data['first_name']} {data['last_name']}\n"
-            msg += f"Email: {data['email']}\n\n"
-            msg += f"Message: {data['message']}"
+            msg = f"Full Name: {first_name} {last_name}\n"
+            msg += f"Email: {email}\n\n"
+            msg += f"Message: {message}"
 
             # subject, message, from_email, recipient_list, fail_silently
             send_mail(
-                data['subject'],
+                subject,
                 msg,
-                data['email'],
+                email,
                 ['admin@gmail.com', 'other@gmail.com'],
                 fail_silently=False
             )
 
-            contact = Contact(first_name=data['first_name'], last_name=data['last_name'], email=data['email'], subject=data['subject'], message=data['message'])
+            contact = Contact(first_name=first_name, last_name=last_name, email=email, subject=subject, message=message)
             contact.save()
 
             return Response({
