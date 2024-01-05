@@ -8,7 +8,7 @@ const Layout = (props: Props) => {
   return (
     <>
       <Navbar />
-      <div className="mt-[76px] md:mt-[84px] h-screen">{props.children}</div>
+      <div className="mt-[76px] md:mt-[84px]">{props.children}</div>
     </>
   );
 };
