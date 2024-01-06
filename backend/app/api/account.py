@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import permissions
+from rest_framework import permissions,status
 from app.services.account_services import user_sign_up
 
 class SignUpView(APIView):
@@ -17,4 +17,4 @@ class SignUpView(APIView):
                 'full_name': user.get_full_name(),
                 'email': user.email,
             }
-        })
+        }, status=status.HTTP_201_CREATED)

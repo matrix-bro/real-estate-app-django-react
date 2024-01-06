@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { signup } from "../redux/features/authSlice";
 
 const Signup = () => {
+  const dispatch = useAppDispatch();
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -10,8 +14,6 @@ const Signup = () => {
   });
 
   const { first_name, last_name, email, password, password2 } = formData;
-
-  console.log(formData);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -25,9 +27,9 @@ const Signup = () => {
 
     if (password !== password2) {
       alert("Passwords don't match");
+    } else {
+      dispatch(signup({ first_name, last_name, email, password, password2 }));
     }
-
-    // TODO: Dispatch Signup here
   };
 
   return (
