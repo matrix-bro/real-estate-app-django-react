@@ -55,7 +55,14 @@ export const signup = createAsyncThunk(
         return thunkAPI.rejectWithValue(response.data);
       }
     } catch (error: any) {
-      //   console.log(error.response.data);
+      console.log(error.response.data);
+      // display alert
+      thunkAPI.dispatch(
+        displayAlert({
+          message: `Error: Registration Failed.`,
+          alertType: "error",
+        })
+      );
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -96,6 +103,14 @@ export const login = createAsyncThunk(
       }
     } catch (error: any) {
       console.log(error.response.data);
+      // display alert
+      thunkAPI.dispatch(
+        displayAlert({
+          message: `Error: ${error.response.data.detail}`,
+          alertType: "error",
+        })
+      );
+
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
