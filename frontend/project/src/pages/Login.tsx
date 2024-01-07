@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { login } from "../redux/features/authSlice";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const { email, password } = formData;
-
-  console.log(formData);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -20,7 +22,7 @@ const Login = () => {
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // TODO: Dispatch Login here
+    dispatch(login({ email, password }));
   };
   return (
     <>

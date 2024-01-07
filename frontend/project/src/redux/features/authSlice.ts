@@ -53,6 +53,42 @@ export const signup = createAsyncThunk(
   }
 );
 
+export const login = createAsyncThunk(
+  "auth/login",
+  async (
+    { email, password }: { email: string; password: string },
+    thunkAPI
+  ) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const data = JSON.stringify({ email, password });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/token/",
+        data,
+        config
+      );
+
+      if (response.status === 200) {
+        console.log("LOgin SUccess");
+        localStorage.setItem("token", response.data.access);
+
+        return response.data.access;
+      } else {
+        return thunkAPI.rejectWithValue(response.data);
+      }
+    } catch (error: any) {
+      console.log(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
 interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
@@ -88,6 +124,17 @@ const authSlice = createSlice({
         state.registered = true;
       })
       .addCase(signup.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.token = action.payload;
+      })
+      .addCase(login.rejected, (state) => {
         state.loading = false;
       });
   },
