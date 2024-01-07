@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { signup } from "../redux/features/authSlice";
+import { Navigate } from "react-router-dom";
 
 const Signup = () => {
+  const { registered } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState({
@@ -31,6 +33,11 @@ const Signup = () => {
       dispatch(signup({ first_name, last_name, email, password, password2 }));
     }
   };
+
+  //
+  if (registered) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <>

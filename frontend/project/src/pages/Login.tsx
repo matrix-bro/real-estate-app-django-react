@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { login } from "../redux/features/authSlice";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const [formData, setFormData] = useState({
@@ -24,6 +26,12 @@ const Login = () => {
 
     dispatch(login({ email, password }));
   };
+
+  // After login success, redirect to home page
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <>
       <div className="w-full flex flex-col justify-center items-center p-8">

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { displayAlert } from "./alertSlice";
 
 export const signup = createAsyncThunk(
   "auth/signup",
@@ -41,7 +42,14 @@ export const signup = createAsyncThunk(
       );
 
       if (response.status === 201) {
-        // console.log("Sign Up Success");
+        // display alert
+        thunkAPI.dispatch(
+          displayAlert({
+            message: "Registration Successfull. You can now login.",
+            alertType: "success",
+          })
+        );
+
         return response.data;
       } else {
         return thunkAPI.rejectWithValue(response.data);
@@ -75,8 +83,12 @@ export const login = createAsyncThunk(
       );
 
       if (response.status === 200) {
-        console.log("LOgin SUccess");
         localStorage.setItem("token", response.data.access);
+
+        // display alert
+        thunkAPI.dispatch(
+          displayAlert({ message: "Login Successfull", alertType: "success" })
+        );
 
         return response.data.access;
       } else {
