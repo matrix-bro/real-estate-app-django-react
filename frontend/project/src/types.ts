@@ -19,4 +19,5 @@ export interface PaginationProps {
   next_page: () => void;
   itemsPerPage: number;
   visitPage: (page: number) => void;
+  active: number;
 }

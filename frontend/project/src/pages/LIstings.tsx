@@ -9,14 +9,15 @@ const Listings = () => {
   const [count, setCount] = useState(0);
   const [previous, setPrevious] = useState("");
   const [next, setNext] = useState("");
+  const [active, setActive] = useState(1);
 
   useEffect(() => {
     const fetchListings = async () => {
       try {
         const res = await axios.get("http://localhost:8000/api/listings/");
 
-        console.log("response");
-        console.log(res.data);
+        // console.log("response");
+        // console.log(res.data);
         setListings([...res.data.results]);
         setCount(res.data.count);
         setPrevious(res.data.previous);
@@ -39,6 +40,7 @@ const Listings = () => {
           setListings([...res.data.results]);
           setNext(res.data.next);
           setPrevious(res.data.previous);
+          setActive((active) => active + 1);
         })
         .catch((error: AxiosError) => {
           console.log(error);
@@ -56,6 +58,7 @@ const Listings = () => {
         setListings([...res.data.results]);
         setNext(res.data.next);
         setPrevious(res.data.previous);
+        setActive((active) => active - 1);
       })
       .catch((error: AxiosError) => {
         console.log(error);
@@ -69,6 +72,7 @@ const Listings = () => {
         setListings([...res.data.results]);
         setPrevious(res.data.previous);
         setNext(res.data.next);
+        setActive(page);
       })
       .catch((err: AxiosError) => {
         console.log(err);
@@ -107,6 +111,7 @@ const Listings = () => {
           previous_page={previous_page}
           next_page={next_page}
           visitPage={visitPage}
+          active={active}
         />
       </div>
     </>

@@ -10,11 +10,14 @@ const Pagination = (props: PaginationProps) => {
       const page = pageNumber;
       let content;
 
+      // Page Numbers Div
       content = (
         <div
           key={i}
           onClick={() => props.visitPage(page)}
-          className="bg-transparent border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200"
+          className={`${
+            props.active === page ? "bg-blue-200" : "bg-transparent" // Checking Active Page
+          } border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200`}
         >
           {pageNumber}
         </div>
