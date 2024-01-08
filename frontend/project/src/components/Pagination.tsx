@@ -7,10 +7,15 @@ const Pagination = (props: PaginationProps) => {
     const itemsPerPage = props.itemsPerPage;
 
     for (let i = 0; i < props.count; i += itemsPerPage) {
+      const page = pageNumber;
       let content;
 
       content = (
-        <div className="bg-transparent border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200">
+        <div
+          key={i}
+          onClick={() => props.visitPage(page)}
+          className="bg-transparent border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200"
+        >
           {pageNumber}
         </div>
       );
@@ -25,11 +30,17 @@ const Pagination = (props: PaginationProps) => {
   return (
     <>
       <div className="flex space-x-1">
-        <button className="bg-transparent border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200">
+        <button
+          onClick={() => props.previous_page()}
+          className="bg-transparent border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200"
+        >
           Previous
         </button>
         <div className="flex space-x-1">{getNumbers()}</div>
-        <button className="bg-transparent border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200">
+        <button
+          onClick={() => props.next_page()}
+          className="bg-transparent border border-blue-500 text-blue-800 py-2 px-3 font-medium hover:bg-blue-200"
+        >
           Next
         </button>
       </div>

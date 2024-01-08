@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { ListingsInterface } from "../types";
 import Card from "../components/Card";
@@ -21,11 +21,59 @@ const Listings = () => {
         setCount(res.data.count);
         setPrevious(res.data.previous);
         setNext(res.data.next);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     };
 
     fetchListings();
   }, []);
+
+  const next_page = () => {
+    if (next === null) {
+      return null;
+    } else {
+      axios
+        .get(next)
+        .then((res) => {
+          setListings([...res.data.results]);
+          setNext(res.data.next);
+          setPrevious(res.data.previous);
+        })
+        .catch((error: AxiosError) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const previous_page = () => {
+    if (previous === null) {
+      return null;
+    }
+    axios
+      .get(previous)
+      .then((res) => {
+        setListings([...res.data.results]);
+        setNext(res.data.next);
+        setPrevious(res.data.previous);
+      })
+      .catch((error: AxiosError) => {
+        console.log(error);
+      });
+  };
+
+  const visitPage = (page: number) => {
+    axios
+      .get(`http://localhost:8000/api/listings/?page=${page}`)
+      .then((res) => {
+        setListings([...res.data.results]);
+        setPrevious(res.data.previous);
+        setNext(res.data.next);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  };
 
   return (
     <>
@@ -56,8 +104,9 @@ const Listings = () => {
         <Pagination
           itemsPerPage={3} // In backend, we have set Pagination to display 3 items per page
           count={count}
-          previous={previous}
-          next={next}
+          previous_page={previous_page}
+          next_page={next_page}
+          visitPage={visitPage}
         />
       </div>
     </>

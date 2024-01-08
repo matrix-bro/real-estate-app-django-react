@@ -15,7 +15,8 @@ export interface ListingsInterface {
 
 export interface PaginationProps {
   count: number;
-  previous: string;
-  next: string;
+  previous_page: () => void;
+  next_page: () => void;
   itemsPerPage: number;
+  visitPage: (page: number) => void;
 }
