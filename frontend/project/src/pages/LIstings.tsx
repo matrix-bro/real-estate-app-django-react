@@ -2,18 +2,25 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ListingsInterface } from "../types";
 import Card from "../components/Card";
+import Pagination from "../components/Pagination";
 
 const Listings = () => {
   const [listings, setListings] = useState<ListingsInterface[]>([]);
+  const [count, setCount] = useState(0);
+  const [previous, setPrevious] = useState("");
+  const [next, setNext] = useState("");
 
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8000/api/listings/?page=1"
-        );
+        const res = await axios.get("http://localhost:8000/api/listings/");
 
+        console.log("response");
+        console.log(res.data);
         setListings([...res.data.results]);
+        setCount(res.data.count);
+        setPrevious(res.data.previous);
+        setNext(res.data.next);
       } catch (error) {}
     };
 
@@ -42,6 +49,16 @@ const Listings = () => {
             />
           );
         })}
+      </div>
+
+      {/* Pagination */}
+      <div className="px-8 pb-8">
+        <Pagination
+          itemsPerPage={3} // In backend, we have set Pagination to display 3 items per page
+          count={count}
+          previous={previous}
+          next={next}
+        />
       </div>
     </>
   );

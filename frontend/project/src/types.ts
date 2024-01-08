@@ -12,3 +12,10 @@ export interface ListingsInterface {
   state: string;
   title: string;
 }
+
+export interface PaginationProps {
+  count: number;
+  previous: string;
+  next: string;
+  itemsPerPage: number;
+}
