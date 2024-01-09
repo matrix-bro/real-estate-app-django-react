@@ -57,18 +57,39 @@ const ListingDetail = () => {
     let images = [];
 
     images.push(
-      <div key={1} className="grid grid-cols-3 gap-6">
-        {listingDetails.photo_1 && <img src={listingDetails.photo_1} alt="" />}
-        {listingDetails.photo_2 && <img src={listingDetails.photo_2} alt="" />}
-        {listingDetails.photo_3 && <img src={listingDetails.photo_3} alt="" />}
-        {listingDetails.photo_4 && <img src={listingDetails.photo_4} alt="" />}
-        {listingDetails.photo_5 && <img src={listingDetails.photo_5} alt="" />}
-        {listingDetails.photo_6 && <img src={listingDetails.photo_6} alt="" />}
-        {listingDetails.photo_7 && <img src={listingDetails.photo_7} alt="" />}
-        {listingDetails.photo_8 && <img src={listingDetails.photo_8} alt="" />}
-        {listingDetails.photo_9 && <img src={listingDetails.photo_9} alt="" />}
+      <div
+        key={1}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {listingDetails.photo_1 && (
+          <img src={listingDetails.photo_1} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_2 && (
+          <img src={listingDetails.photo_2} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_3 && (
+          <img src={listingDetails.photo_3} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_4 && (
+          <img src={listingDetails.photo_4} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_5 && (
+          <img src={listingDetails.photo_5} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_6 && (
+          <img src={listingDetails.photo_6} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_7 && (
+          <img src={listingDetails.photo_7} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_8 && (
+          <img src={listingDetails.photo_8} className="h-full w-full" alt="" />
+        )}
+        {listingDetails.photo_9 && (
+          <img src={listingDetails.photo_9} className="h-full w-full" alt="" />
+        )}
         {listingDetails.photo_10 && (
-          <img src={listingDetails.photo_10} alt="" />
+          <img src={listingDetails.photo_10} className="h-full w-full" alt="" />
         )}
       </div>
     );
@@ -78,15 +99,15 @@ const ListingDetail = () => {
 
   return (
     <>
-      <div className="mt-3 bg-blue-100 text-center py-5 space-y-3">
-        <h1 className="text-4xl">{listingDetails.title}</h1>
+      <div className="bg-blue-100 text-center py-5 space-y-3">
+        <h1 className="text-2xl md:text-4xl">{listingDetails.title}</h1>
         <p className="text-lg">
           {listingDetails.city}, {listingDetails.state},{" "}
           {listingDetails.zipcode}
         </p>
       </div>
 
-      <div className="mt-6 px-12 space-y-8 pb-8">
+      <div className="mt-6 px-6 md:px-12 space-y-8 pb-8">
         {/* breadcrumb */}
         <div className="bg-gray-200 py-3">
           <Link to="/" className="text-blue-500 pl-6 pr-2">
@@ -99,22 +120,20 @@ const ListingDetail = () => {
           / {listingDetails.title}
         </div>
 
-        <div className="grid grid-cols-3 space-x-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 space-x-8">
           <div className="col-span-2">
             <img src={listingDetails.photo_main} alt="" className="w-full" />
           </div>
 
           {/* Realtor details */}
           <div className="">
-            <img
-              src={realtor.photo}
-              alt="realtor photo"
-              className="w-full contain"
-            />
-            <h3 className="text-3xl text-teal-700 pt-5">{realtor.name}</h3>
-            <p className="text-teal-600 pt-2">{realtor.phone}</p>
-            <p className="text-teal-600">{realtor.email}</p>
-            <p className="">{realtor.description}</p>
+            <img src={realtor.photo} alt="realtor photo" className="w-full" />
+            <div className="text-center">
+              <h3 className="text-3xl text-teal-700 pt-5">{realtor.name}</h3>
+              <p className="text-teal-600 pt-2">{realtor.phone}</p>
+              <p className="text-teal-600">{realtor.email}</p>
+              <p className="capitalize">{realtor.description}</p>
+            </div>
           </div>
         </div>
 
