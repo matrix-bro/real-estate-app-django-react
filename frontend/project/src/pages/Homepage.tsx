@@ -24,8 +24,7 @@ const Homepage = () => {
   }, []);
   return (
     <>
-      <div className="bg-gray-200 px-12 py-12 lg:px-36 space-y-6">
-        This will be Search Listings Form
+      <div className="bg-gray-200 px-8 py-12 lg:px-12 space-y-6">
         <SearchListingsForm />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8 px-8">
