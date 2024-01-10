@@ -3,10 +3,20 @@ import { BaseSyntheticEvent, useState } from "react";
 import { ListingsInterface } from "../types";
 
 interface Props {
-  setListings: React.Dispatch<React.SetStateAction<ListingsInterface[]>>;
+  setSearchListings: React.Dispatch<React.SetStateAction<ListingsInterface[]>>;
+  setCount: React.Dispatch<React.SetStateAction<number>>;
+  setPrevious: React.Dispatch<React.SetStateAction<string>>;
+  setNext: React.Dispatch<React.SetStateAction<string>>;
+  setSearchFormData: React.Dispatch<React.SetStateAction<{}>>;
 }
 
-const SearchListingsForm = ({ setListings }: Props) => {
+const SearchListingsForm = ({
+  setSearchListings,
+  setCount,
+  setPrevious,
+  setNext,
+  setSearchFormData,
+}: Props) => {
   const [formData, setFormData] = useState({
     sale_type: "For Sale",
     price: "$0+",
@@ -70,8 +80,12 @@ const SearchListingsForm = ({ setListings }: Props) => {
         config
       )
       .then((res) => {
-        console.log(res.data);
-        setListings([...res.data.results]);
+        // console.log(res.data);
+        setSearchListings([...res.data.results]);
+        setCount(res.data.count);
+        setPrevious(res.data.previous);
+        setNext(res.data.next);
+        setSearchFormData(formData);
       })
       .catch((err: AxiosError) => {
         console.log(err);
