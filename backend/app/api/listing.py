@@ -5,6 +5,7 @@ from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from datetime import datetime, timezone
+from rest_framework.pagination import PageNumberPagination
 
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,7 +28,7 @@ class ListingDetailView(RetrieveAPIView):
     serializer_class = ListingDetailSerializer
     lookup_field = 'slug'
 
-class SearchListingsView(APIView):
+class SearchListingsView(APIView, PageNumberPagination):
     permission_classes = (permissions.AllowAny, )
 
     """
@@ -136,7 +137,7 @@ class SearchListingsView(APIView):
                     queryset = queryset.exclude(slug__iexact=slug)
 
 
-        has_photos = data['has_photos']                    
+        has_photos = data['has_photos']
         if has_photos == '1+':
             has_photos = 1
         elif has_photos == '3+':
@@ -145,6 +146,8 @@ class SearchListingsView(APIView):
             has_photos = 5
         elif has_photos == '10+':
             has_photos = 10
+        elif has_photos == 'Any':
+            has_photos = 0
 
         for query in queryset:
             count = 0
@@ -174,11 +177,13 @@ class SearchListingsView(APIView):
                 queryset = queryset.exclude(slug__iexact=slug)
 
         open_house = data['open_house']
-        queryset = queryset.filter(open_house__iexact=open_house)
+        queryset = queryset.filter(open_house=open_house)
 
         keywords = data['keywords']
         queryset = queryset.filter(description__icontains=keywords)
 
-        serializer = ListingSerializer(queryset, many=True)
+        results = self.paginate_queryset(queryset, request)
 
-        return Response(serializer.data)  
+        serializer = self.get_paginated_response(ListingSerializer(results, many=True).data)
+
+        return Response(serializer.data)

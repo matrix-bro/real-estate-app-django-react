@@ -1,6 +1,12 @@
+import axios, { AxiosError } from "axios";
 import { BaseSyntheticEvent, useState } from "react";
+import { ListingsInterface } from "../types";
 
-const SearchListingsForm = () => {
+interface Props {
+  setListings: React.Dispatch<React.SetStateAction<ListingsInterface[]>>;
+}
+
+const SearchListingsForm = ({ setListings }: Props) => {
   const [formData, setFormData] = useState({
     sale_type: "For Sale",
     price: "$0+",
@@ -39,7 +45,37 @@ const SearchListingsForm = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit");
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios
+      .post(
+        "http://localhost:8000/api/listings/search/",
+        {
+          sale_type,
+          price,
+          bedrooms,
+          home_type,
+          bathrooms,
+          sqft,
+          days_listed,
+          has_photos,
+          open_house,
+          keywords,
+        },
+        config
+      )
+      .then((res) => {
+        console.log(res.data);
+        setListings([...res.data.results]);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -196,7 +232,7 @@ const SearchListingsForm = () => {
               name="open_house"
               onChange={(e) => onChange(e)}
               className="ml-3 w-3.5 h-3.5"
-              checked={formData.open_house}
+              checked={open_house}
             />
           </div>
 

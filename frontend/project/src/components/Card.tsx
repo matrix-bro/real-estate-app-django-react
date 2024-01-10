@@ -4,7 +4,7 @@ import { ListingsInterface } from "../types";
 const Card = (props: ListingsInterface) => {
   return (
     <>
-      <div className="bg-[#e0e0e0] px-6 py-4">
+      <div className="bg-[#e0e0e0] px-6 py-4 rounded-md">
         <h3 className="text-lg font-semibold text-teal-700 py-3">
           {props.title}
         </h3>

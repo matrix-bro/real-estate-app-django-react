@@ -25,7 +25,7 @@ const Homepage = () => {
   return (
     <>
       <div className="bg-gray-200 px-8 py-12 lg:px-12 space-y-6">
-        <SearchListingsForm />
+        <SearchListingsForm setListings={setListings} />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8 px-8">
         {listings.map((listing: ListingsInterface, index) => {
