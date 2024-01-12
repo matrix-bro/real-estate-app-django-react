@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ListingsInterface } from "../types";
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
+import { Helmet } from "react-helmet-async";
 
 const Listings = () => {
   const [listings, setListings] = useState<ListingsInterface[]>([]);
@@ -81,6 +82,11 @@ const Listings = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Listings | RealEstate</title>
+        <meta name="description" content="Real Estate Listings Page" />
+      </Helmet>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-8 px-8">
         {listings.map((listing: ListingsInterface, index) => {
           return (

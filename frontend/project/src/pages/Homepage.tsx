@@ -4,6 +4,7 @@ import { ListingsInterface } from "../types";
 import Card from "../components/Card";
 import SearchListingsForm from "../components/SearchListingsForm";
 import Pagination from "../components/Pagination";
+import { Helmet } from "react-helmet-async";
 
 const Homepage = () => {
   const [latestListings, setLatestListings] = useState<ListingsInterface[]>([]);
@@ -90,6 +91,11 @@ const Homepage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Home | RealEstate</title>
+        <meta name="description" content="Real Estate Home Page" />
+      </Helmet>
+
       <h1 className="text-3xl text-center pt-6 text-teal-600">
         Latest Listings
       </h1>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { signup } from "../redux/features/authSlice";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Signup = () => {
   const { registered } = useAppSelector((state) => state.auth);
@@ -41,6 +42,11 @@ const Signup = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Sign Up | RealEstate</title>
+        <meta name="description" content="Real Estate Sign Up Page" />
+      </Helmet>
+
       <div className="w-full flex flex-col justify-center items-center p-8">
         <h1 className="text-3xl font-semibold text-emerald-500">Sign Up</h1>
 

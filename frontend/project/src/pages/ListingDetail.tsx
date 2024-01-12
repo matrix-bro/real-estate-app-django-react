@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ListingDetailsInterface, RealtorInterface } from "../types";
+import { Helmet } from "react-helmet-async";
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -99,6 +100,13 @@ const ListingDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>
+          {`${listingDetails.title}`} | Listing Details | RealEstate
+        </title>
+        <meta name="description" content="Real Estate Listing Details Page" />
+      </Helmet>
+
       <div className="bg-blue-100 text-center py-5 space-y-3">
         <h1 className="text-2xl md:text-4xl">{listingDetails.title}</h1>
         <p className="text-lg">

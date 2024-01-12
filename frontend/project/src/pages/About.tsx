@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { RealtorInterface } from "../types";
+import { Helmet } from "react-helmet-async";
 
 const About = () => {
   const [topSeller, setTopSeller] = useState<RealtorInterface[]>([]);
@@ -38,6 +39,10 @@ const About = () => {
 
   return (
     <>
+      <Helmet>
+        <title>About Us | RealEstate</title>
+        <meta name="description" content="Real Estate About Us Page" />
+      </Helmet>
       <h1 className="text-3xl md:text-4xl bg-blue-300 text-center py-12">
         About Us
       </h1>

@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -55,6 +56,11 @@ const Contact = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Contact | RealEstate</title>
+        <meta name="description" content="Real Estate Contact Us Page" />
+      </Helmet>
+
       <h1 className="text-4xl bg-sky-200 text-center py-12">Contact Us</h1>
       <form
         className="w-full mx-3 space-y-4 md:mx-auto my-8 md:w-2/4"
