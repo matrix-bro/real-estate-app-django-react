@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Listings from "./pages/Listings";
 import { NotFound } from "./components/NotFound";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -17,7 +18,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/listings" element={<Listings />} />
-            <Route path="/listings/:id" element={<ListingDetail />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/listings/:id" element={<ListingDetail />} />
+            </Route>
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/contact" element={<Contact />} />
