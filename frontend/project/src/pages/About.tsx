@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { RealtorInterface } from "../types";
 import { Helmet } from "react-helmet-async";
+import House from "../assets/images/house1.jpg";
 
 const About = () => {
   const [topSeller, setTopSeller] = useState<RealtorInterface[]>([]);
@@ -57,7 +58,7 @@ const About = () => {
             dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
             amet consectetur adipisicing elit.
           </p>
-          <img src="/house1.jpg" alt="" className="w-full" />
+          <img src={House} alt="" className="w-full" />
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
             dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
